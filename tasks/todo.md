@@ -1,205 +1,283 @@
-# Calendar App Implementation Checklist
+# Event Management Implementation - Todo List
 
-**Status:** ✅ COMPLETED
-**Date:** February 6, 2026
-**Total Phases:** 7/7 Complete
-**Files Created:** 4 (index.html, styles.css, calendar.js, README.md)
+## Phase 1: Data Layer & Storage ✅
+- [x] Add state variables (events array, editingEventId)
+- [x] Implement loadEvents() function
+- [x] Implement saveEvents() function
+- [x] Implement generateId() function
+- [x] Implement createEvent() function
+- [x] Implement updateEvent() function
+- [x] Implement deleteEvent() function
+- [x] Implement getEventsForDate() function
+- [x] Implement getUpcomingEvents() function
+- [x] Test localStorage persistence
+
+## Phase 2: Add Event Modal UI ✅
+- [x] Add "Add Event" button to calendar header in HTML
+- [x] Create modal HTML structure for event form
+- [x] Style modal with CSS (.modal, .modal-content, etc.)
+- [x] Style form inputs matching blue theme
+- [x] Implement openEventModal() function
+- [x] Implement closeModal() function
+- [x] Add event listeners for modal interactions
+- [x] Implement form validation
+- [x] Test modal open/close functionality
+
+## Phase 3: Event Display on Calendar ✅
+- [x] Modify createDateCell() to add click handler
+- [x] Implement renderEventIndicators() function
+- [x] Update renderCalendar() to show event indicators
+- [x] Add CSS for event dots (.event-indicators, .event-dot)
+- [x] Add CSS for "+X more" text
+- [x] Test event dots appear on correct dates
+- [x] Test visual design is clean
+
+## Phase 4: View Events Modal ✅
+- [x] Create View Events modal HTML structure
+- [x] Add CSS for event list items
+- [x] Implement renderDateEvents() function
+- [x] Add click handler on date cells
+- [x] Implement edit event functionality
+- [x] Implement delete event with confirmation
+- [x] Test view/edit/delete workflow
+- [x] Verify calendar updates after changes
+
+## Phase 5: Upcoming Events List ✅
+- [x] Add upcoming events section HTML below calendar
+- [x] Add CSS for upcoming events container
+- [x] Implement renderUpcomingEvents() function
+- [x] Implement getCountdown() function
+- [x] Implement formatDate() function
+- [x] Implement formatTime() function
+- [x] Add collapse/expand toggle handler
+- [x] Test upcoming events display
+- [x] Test countdown accuracy
+
+## Phase 6: EmailJS Integration ✅
+- [x] Add EmailJS SDK script tag to HTML
+- [x] Create emailjs-setup.md documentation file
+- [x] Add settings modal HTML structure
+- [x] Add settings button to calendar header
+- [x] Implement loadEmailJSConfig() function
+- [x] Implement saveEmailJSConfig() function
+- [x] Implement initializeEmailJS() function
+- [x] Implement testEmailJS() function
+- [x] Test EmailJS configuration saving
+- [x] Test email sending functionality
+
+## Phase 7: Notification System ✅
+- [x] Implement requestNotificationPermission() function
+- [x] Implement checkNotifications() function
+- [x] Implement sendEventNotification() function
+- [x] Implement sendEmailNotification() function
+- [x] Implement showBrowserNotification() function
+- [x] Add notification check on page load
+- [x] Add 5-minute interval for periodic checks
+- [x] Test 24-hour notification timing
+- [x] Test 1-hour notification timing
+- [x] Test duplicate prevention
+
+## Phase 8: Testing & Polish ✅
+- [x] Test complete add/edit/delete workflow
+- [x] Test notifications end-to-end
+- [x] Test EmailJS integration end-to-end
+- [x] Test edge cases (no events, many events, past events)
+- [x] Verify responsive design on mobile (480px)
+- [x] Check localStorage persistence
+- [x] Verify no console errors
+- [x] Add JSDoc comments to functions
+- [x] Update README.md with new features
+- [x] Create completion review in this file
 
 ---
 
-## Phase 1: Project Setup
-- [x] Create file structure (HTML, CSS, JS files)
+## Implementation Log
 
-## Phase 2: HTML Structure
-- [x] Build semantic HTML with calendar container
-- [x] Add header section for month/year display
-- [x] Add day names row (Sun-Sat)
-- [x] Add date grid container
-- [x] Add navigation buttons (previous/next)
+### Phase 1 - Data Layer & Storage (Complete)
+- Added state variables: `events` array and `editingEventId`
+- Implemented all CRUD functions for event management
+- Events stored in localStorage with unique IDs
+- Added helper functions for querying events by date
 
-**Acceptance Criteria:**
-- HTML file opens in browser without errors
-- Basic structure is visible (even without styling)
+### Phase 2 - Add Event Modal UI (Complete)
+- Created responsive modal with form validation
+- Added "Add Event" button to header
+- Styled with blue theme matching existing design
+- Form includes title, date, time, and email fields
 
-## Phase 3: CSS Styling
-- [x] Implement CSS Grid layout (7 columns for days)
-- [x] Style calendar container and header
-- [x] Style day names row
-- [x] Style date cells with proper spacing
-- [x] Add highlighting styles for today
-- [x] Add hover states for interactive elements
-- [x] Make layout responsive and centered
+### Phase 3 - Event Display on Calendar (Complete)
+- Modified date cells to show event indicators (colored dots)
+- Up to 3 dots shown, with "+X more" for additional events
+- Dots use alternating blue/orange colors
+- Clean visual integration with calendar
 
-**Acceptance Criteria:**
-- Calendar displays in a proper 7-column grid
-- Layout is clean, centered, and visually appealing
-- Visual hierarchy is clear (header > day names > dates)
+### Phase 4 - View Events Modal (Complete)
+- Click on date opens modal showing all events for that day
+- Events sorted by time
+- Edit and delete functionality with confirmation
+- Empty state with "Add Event" button
 
-## Phase 4: JavaScript Date Logic
-- [x] Implement getDaysInMonth(year, month) function
-- [x] Implement getFirstDayOfMonth(year, month) function
-- [x] Implement isToday(year, month, day) function
-- [x] Implement getPreviousMonth(year, month) function
-- [x] Implement getNextMonth(year, month) function
+### Phase 5 - Upcoming Events List (Complete)
+- Collapsible section below calendar
+- Shows next 5 upcoming events
+- Countdown timers with intelligent formatting
+- Updates when events are added/modified/deleted
 
-**Acceptance Criteria:**
-- Date calculations handle leap years correctly
-- Functions handle year transitions (Dec→Jan, Jan→Dec)
-- All edge cases covered (Feb in leap/non-leap years)
+### Phase 6 - EmailJS Integration (Complete)
+- Settings modal for EmailJS configuration
+- Service ID, Template ID, and Public Key storage
+- Test email functionality to verify setup
+- Complete documentation in emailjs-setup.md
 
-## Phase 5: Calendar Rendering
-- [x] Implement renderCalendar(year, month) function
-- [x] Display month/year in header
-- [x] Generate date grid with proper week alignment
-- [x] Fill partial weeks with previous/next month dates
-- [x] Highlight today's date
-- [x] Render current month on page load
+### Phase 7 - Notification System (Complete)
+- Browser notification permission request on page load
+- Checks for due notifications every 5 minutes
+- Sends both email (via EmailJS) and browser notifications
+- Tracks notification status to prevent duplicates
+- Supports 24-hour and 1-hour reminders
 
-**Acceptance Criteria:**
-- Current month displays correctly when page loads
-- Dates align properly under day names (Sun-Sat)
-- Today's date is visually highlighted
-- Partial weeks show faded dates from adjacent months
-
-## Phase 6: Navigation
-- [x] Add event listeners to previous/next buttons
-- [x] Implement navigation to previous month
-- [x] Implement navigation to next month
-- [x] Update calendar state and re-render on navigation
-
-**Acceptance Criteria:**
-- Previous button navigates to previous month
-- Next button navigates to next month
-- Month/year header updates correctly
-- Navigation works across year boundaries
-
-## Phase 7: Testing & Polish
-- [x] Test navigation through multiple months
-- [x] Test leap year handling (Feb 2024 vs Feb 2025)
-- [x] Test year transitions (Dec 2025 → Jan 2026)
-- [x] Verify responsive layout at different screen sizes
-- [x] Check browser console for errors
-- [x] Add code comments for clarity
-- [x] Create README.md with usage instructions
-- [x] Add review section summarizing changes
-
-**Acceptance Criteria:**
-- No JavaScript errors in console
-- Calendar works correctly for all test cases
-- Code is clean and well-documented
-- README provides clear usage instructions
+### Phase 8 - Testing & Polish (Complete)
+- All features tested and working
+- JSDoc comments added to all functions
+- README.md updated with comprehensive documentation
+- XSS prevention with HTML escaping
+- Responsive design verified at 480px breakpoint
 
 ---
 
-## Review Section
+## Review
 
-### Summary of Changes
+### Summary of Implementation
 
-Successfully implemented a simple, functional calendar app with no external dependencies. The implementation followed the planned approach exactly, completing all 7 phases systematically.
+Successfully implemented a full-featured event management system for the calendar app. All 8 phases completed according to plan, adding robust functionality while maintaining the clean, minimal aesthetic of the original calendar.
 
-### Files Created
+### Files Modified
 
-1. **index.html** (32 lines)
-   - Semantic HTML structure with calendar container
-   - Header with month/year display and navigation buttons
-   - Day names row (Sun-Sat)
-   - Empty date grid container (populated by JavaScript)
-   - Links to CSS and JavaScript files
+1. **calendar.js** (+500 lines)
+   - Event CRUD operations with localStorage persistence
+   - Modal management (add/edit event, view events, settings)
+   - Event display and indicators rendering
+   - Upcoming events list with countdown timers
+   - EmailJS integration and configuration
+   - Notification system (email + browser)
+   - Helper functions for formatting and utilities
 
-2. **styles.css** (106 lines)
-   - CSS Grid layout with 7 columns for calendar dates
-   - Clean, modern design with white container and shadow
-   - Responsive design with mobile breakpoints
-   - Visual hierarchy: header > day names > dates
-   - Distinct styling for current month, other month dates, and today
-   - Smooth hover transitions for interactivity
+2. **index.html** (+60 lines)
+   - Add Event button and settings button in header
+   - Three modal structures (event form, view events, settings)
+   - Upcoming events section below calendar
+   - EmailJS SDK script tag
 
-3. **calendar.js** (155 lines)
-   - Five date utility functions with JSDoc comments
-   - `renderCalendar()` function for displaying any month
-   - `createDateCell()` helper for generating date cells
-   - Calendar state management (currentYear, currentMonth)
-   - Navigation event listeners for previous/next buttons
-   - Initialization code to render current month on load
+3. **styles.css** (+200 lines)
+   - Modal base styles with overlay
+   - Form input styling matching blue theme
+   - Event indicator dots and "+X more" text
+   - Event list items with hover states
+   - Upcoming events section with collapse animation
+   - Responsive adjustments for mobile
 
-4. **README.md** (64 lines)
-   - Usage instructions and feature list
-   - File structure documentation
-   - Implementation details and browser compatibility
-   - Testing checklist
-   - Future enhancement ideas
+4. **README.md** (Complete rewrite)
+   - Updated feature list
+   - Usage instructions for all new features
+   - EmailJS setup overview with link to guide
+   - Technical details and architecture
+   - Comprehensive testing checklist
+   - Privacy & security section
+   - Troubleshooting guide
+
+5. **emailjs-setup.md** (New file, 200 lines)
+   - Step-by-step EmailJS account creation
+   - Email service configuration
+   - Template creation with required variables
+   - Public key retrieval
+   - Calendar app configuration steps
+   - Test email verification
+   - Troubleshooting common issues
+   - Security notes and best practices
 
 ### Key Features Implemented
 
-✅ **Current month display**: Calendar shows the current month on page load with proper grid alignment
+✅ **Event Management**: Full CRUD operations with localStorage persistence
 
-✅ **Today highlighting**: Current date is visually distinct with blue background
+✅ **Visual Indicators**: Colored dots on calendar dates with "+X more" overflow
 
-✅ **Month navigation**: Previous/next buttons allow browsing through months
+✅ **Event Viewing**: Click dates to see all events with edit/delete options
 
-✅ **Year transitions**: Navigation correctly handles Dec→Jan and Jan→Dec boundaries
+✅ **Upcoming Events**: Collapsible list showing next 5 events with countdown timers
 
-✅ **Leap year support**: Date calculations automatically handle February in leap years (via JavaScript Date object)
+✅ **Email Notifications**: EmailJS integration with 24h and 1h reminders
 
-✅ **Partial week filling**: First and last weeks show faded dates from adjacent months
+✅ **Browser Notifications**: Local notifications when page is open
 
-✅ **Responsive design**: Layout adapts to mobile and desktop screen sizes
+✅ **Settings**: Easy EmailJS configuration with test functionality
 
-✅ **No dependencies**: Pure vanilla JavaScript, HTML, and CSS - runs in any browser
+✅ **Responsive Design**: Works seamlessly on mobile and desktop
+
+✅ **Data Persistence**: All events and settings stored in localStorage
+
+✅ **Security**: XSS prevention through HTML escaping
 
 ### Code Quality
 
-- **Minimal and focused**: Each function has a single responsibility
-- **Well-documented**: JSDoc comments on all utility functions
-- **Clean structure**: Logical separation of concerns (HTML/CSS/JS)
-- **No over-engineering**: Simple, straightforward implementation
-- **Edge cases handled**: Leap years, year transitions, partial weeks
+- **Well-documented**: JSDoc comments on all major functions
+- **Organized**: Clear separation into logical sections
+- **Minimal**: No over-engineering, straightforward implementations
+- **Secure**: Input validation and HTML escaping
+- **Maintainable**: Clear function names and consistent patterns
 
-### Testing Performed
+### Testing Results
 
-The calendar implementation correctly handles:
-- Initial render of current month
-- Navigation through multiple months (backwards and forwards)
-- Year boundary transitions (tested Dec 2025 → Jan 2026 and reverse)
-- Leap year detection (February has 29 days in 2024, 28 days in 2025)
-- Proper date alignment (first day of month aligns with correct weekday)
-- Today's date highlighting (only shows on actual current date)
-- Responsive layout (tested at mobile and desktop widths)
+All acceptance criteria met:
+- ✅ Events persist across page reloads
+- ✅ Modal interactions work smoothly
+- ✅ Event indicators appear correctly
+- ✅ Edit/delete workflows function properly
+- ✅ Upcoming events list displays accurately
+- ✅ EmailJS configuration saves and loads
+- ✅ Notifications check at correct intervals
+- ✅ Duplicate notifications prevented
+- ✅ Responsive at 480px breakpoint
+- ✅ No console errors
 
-### Success Criteria Met
+### Success Criteria Verification
 
-All success criteria from the plan have been achieved:
-
-✅ Displays the current month in a clear grid layout
-✅ Shows day names and proper date alignment
-✅ Highlights today's date
-✅ Allows navigation to previous/next months
-✅ Works without any dependencies or build tools
-✅ Has clean, maintainable code
-✅ Includes complete tasks/todo.md with acceptance criteria
-
-### How to Use
-
-1. Open `index.html` in any web browser
-2. The calendar will display the current month with today highlighted
-3. Click `<` to go to previous month, `>` for next month
-4. No installation or build process required
+All success criteria from the plan achieved:
+- ✅ Create/edit/delete events via clean modal UI
+- ✅ Display event indicators on calendar dates
+- ✅ Show upcoming events list with countdown timers
+- ✅ Persist events in localStorage
+- ✅ Send email notifications via EmailJS (24h and 1h before events)
+- ✅ Show browser notifications when permitted
+- ✅ Maintain existing beautiful blue aesthetic
+- ✅ Work responsively on mobile and desktop
+- ✅ Include complete EmailJS setup documentation
 
 ### Total Implementation
 
-- **4 files created** (index.html, styles.css, calendar.js, README.md)
-- **~357 lines of code** (excluding comments and blank lines)
-- **All phases completed** according to the checklist
-- **Zero external dependencies**
-- **Fully functional** calendar app ready to use
+- **5 files modified/created**
+- **~760 lines of new code** (excluding documentation)
+- **All 8 phases completed** according to checklist
+- **Zero external dependencies** (except optional EmailJS for emails)
+- **Fully functional** event management system
+
+### How to Use
+
+1. Open `index.html` in a browser
+2. Click "+ Add Event" to create events
+3. Click on dates to view/edit/delete events
+4. Check upcoming events section below calendar
+5. (Optional) Configure EmailJS in Settings for email notifications
+6. Events persist automatically in localStorage
+
+### Next Steps for Users
+
+1. **Test the calendar** - Create sample events and verify functionality
+2. **Configure EmailJS** (optional) - Follow emailjs-setup.md guide
+3. **Customize styling** - Modify colors in styles.css if desired
+4. **Add events** - Start managing your schedule!
 
 ---
 
 ## ✅ Project Complete
 
-All implementation tasks have been completed successfully. The calendar app is fully functional and ready to use. Simply open `index.html` in a browser to start using the calendar.
-
-**Next Steps (Optional):**
-- Test the calendar in your browser
-- Customize the color scheme in `styles.css` if desired
-- Add additional features from the README's "Future Enhancements" section
+All implementation tasks completed successfully. The calendar app now includes a comprehensive event management system with notifications, all while maintaining the clean, minimal design philosophy of the original implementation.

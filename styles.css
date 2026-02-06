@@ -8,10 +8,12 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: #f5f5f5;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    gap: 20px;
 }
 
 .calendar-container {
@@ -34,6 +36,12 @@ body {
     font-size: 24px;
     font-weight: 600;
     color: #333;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .nav-button {
@@ -80,12 +88,41 @@ body {
 .date-cell {
     aspect-ratio: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s;
+    padding: 4px;
+    gap: 2px;
+}
+
+.date-number {
+    flex-shrink: 0;
+}
+
+.event-indicators {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 10px;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.event-more {
+    font-size: 10px;
+    color: #666;
+    font-weight: 500;
 }
 
 .date-cell.current-month {
@@ -112,6 +149,281 @@ body {
     background-color: #0056b3;
 }
 
+/* Button styles */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Form styles */
+form {
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #999;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+/* Events list in modal */
+.events-list-container {
+    padding: 24px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.event-list-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-left: 4px solid #007bff;
+}
+
+.event-list-item:last-child {
+    margin-bottom: 0;
+}
+
+.event-list-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.event-list-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+}
+
+.event-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.event-actions button {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.empty-state p {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+/* Upcoming Events Section */
+.upcoming-events-section {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.upcoming-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.upcoming-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.toggle-icon {
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.toggle-icon.collapsed {
+    transform: rotate(-90deg);
+}
+
+.upcoming-events-list {
+    max-height: 400px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+}
+
+.upcoming-events-list.collapsed {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.upcoming-event-item {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s;
+}
+
+.upcoming-event-item:last-child {
+    border-bottom: none;
+}
+
+.upcoming-event-item:hover {
+    background-color: #f8f9fa;
+}
+
+.upcoming-event-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.upcoming-event-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+}
+
+.countdown {
+    font-size: 13px;
+    color: #007bff;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .calendar-container {
@@ -128,5 +440,19 @@ body {
 
     .day-names div {
         font-size: 12px;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .btn-primary {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .modal-content {
+        width: 95%;
     }
 }
